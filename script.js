@@ -1,13 +1,15 @@
-const elementById = (id) => {
+const elementById = (id) => {  //look fuction name
   console.log(id);
- return document.getElementById(id);
-//  document.getElementById(id);
+ return document.getElementById(id);  //bug fix logic miss....
+//  document.getElementById(id); //bug
 };
 
 const handleSearch = () => {
+  const artistContainer = elementById("artists"); //bug
+  const albumContainer = elementById("albums");   //bug
+
   const keyword = elementById("keyword");
-  const artistContainer = elementById("artists");
-  const albumContainer = elementById("albums");
+  console.log(keyword);
   const url = `https://theaudiodb.com/api/v1/json/2/search.php?s=${keyword.value}`;
   console.log(url);
   fetch(url)
@@ -26,13 +28,14 @@ const showArtists = (data) => {
   console.log(artists);
   // const {artist} = data;
   const artistContainer = elementById("artists");
+  console.log(artistContainer);
   data?.artists?.forEach((artist) => {
     const div = document.createElement("div");
     div.classList.add("artist-card"); //main card div tar
     div.innerHTML = `<div class="image-container">
     <div class="image-container-inner">
       <img
-        src="${artist.strArtistThumb ? artist.strArtistThumb : "https://www.seekpng.com/png/detail/966-9665317_placeholder-image-person-jpg.png"}"
+        src="${artist.strArtistThumb ? artist.strArtistThumb : "https://logodix.com/logo/919159.jpg"}"
         alt=""
       />
     </div>
@@ -48,7 +51,7 @@ const showArtists = (data) => {
   </button>`;
     artistContainer.appendChild(div);
 
-    albumContainer.innerHTML = "";
+    // albumContainer.innerHTML = ""; //bug
   });
 };
 
@@ -69,13 +72,14 @@ const fetchAlbums = (id) => {
 const showAlbum = (data) => {
   console.log(data);
   const albumContainer = elementById("albums");
-  data.forEach((album) => {
+  data.forEach((album) => {//bug
+    console.log(album);
     const div = document.createElement("div");
     div.classList.add("album");
     div.innerHTML = `
         <div class="album-image-container">
           <img
-            src="${album.strAlbumThumb ? album.strAlbumThumb : "https://pic.onlinewebfonts.com/svg/img_148071.png"}"
+            src="${album.strAlbumThumb ? album.strAlbumThumb : "https://i.pinimg.com/originals/24/9e/24/249e2442e2d2865df1f60cc28a4836ec.jpg"}"
             alt=""
           />
         </div>
